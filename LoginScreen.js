@@ -1,6 +1,7 @@
 import React from 'react';
 import { Alert, View, Text, TextInput, Button, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import Constants from 'expo-constants'
+import { StatusBar } from 'expo-status-bar';
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState('');
@@ -38,12 +39,12 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
         />
       </View>
-        <Button title='prueba' onPress={handleLogin}/>
+        <Button borderColor= "black" color = "#00CC45"title='Iniciar sesion' onPress={handleLogin}/>
       <View/>
       <View style={{ alignSelf: "center", flexDirection: "row" }}>
         <Text style={styles.text}>¿Nuevo en GameIt?</Text>
         <TouchableWithoutFeedback onPress={() => Alert.alert('aqui te lleva a la pag de registro')}>
-          <Text style={styles.text}> Registrate Aqui</Text>
+          <Text style={styles.registertext}> Registrate Aqui</Text>
         </TouchableWithoutFeedback>
       </View>
     </View>
@@ -55,7 +56,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 30,
     justifyContent: "center",
-    marginTop: Constants.statusBarHeight,
     backgroundColor: "#181818",
   },
   title: {
@@ -79,12 +79,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "green",
+    backgroundColorcolor: "#00CC45",
   },
   text: {
     marginTop: 15,
     color: "#FFFFFF",
   },
+  registertext:{
+    marginTop: 15,
+    color: "#FFFFFF",
+    fontWeight: "bold"
+  }
 });
 
 export default LoginScreen;
