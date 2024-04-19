@@ -7,10 +7,10 @@ import { AuthContext, AuthProvider } from './AuthProvider'; // Replace with your
 
 export default function App() {
   return (
-    <AuthProvider>
-      <LoginScreen />
-      <StatusBar style="auto" />
-    </AuthProvider>
+      <AuthProvider>
+        <LoginScreen />
+        <StatusBar style="light" />
+      </AuthProvider>
   );
 }
 

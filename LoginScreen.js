@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { Alert, View, Text, TextInput, Button, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import Constants from 'expo-constants'
 
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState('');
@@ -14,56 +15,75 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
+
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Gameit</Text>
-      <Text style={styles.subtitle}>Be part of a growing community of gamers</Text>
-      <TextInput
-        style={styles.input}
-        value={username}
-        onChangeText={setUsername}
-        placeholder="Email or username *"
-        placeholderTextColor="#999"
-      />
-      <TextInput
-        style={styles.input}
-        value={password}
-        onChangeText={setPassword}
-        placeholder="Password *"
-        placeholderTextColor="#999"
-        secureTextEntry
-      />
-      <Button title="Join" onPress={handleLogin} />
-      <Text style={styles.text}>New to Gameit? Sign Up</Text>
+      <View style={{ alignItems: "center" }}><Text style={styles.title}>GameIt</Text></View>
+      <View style={{ alignItems: "center" }}><Text style={styles.subtitle}>Se parte de la comunidad Gamer</Text></View>
+      <View style={{ alignItems: "center" }}>
+        <TextInput
+          style={styles.input}
+          value={username}
+          onChangeText={setUsername}
+          placeholder="Email or username *"
+          placeholderTextColor="#999999"
+        />
+      </View>
+      <View style={{ alignItems: "center" }}>
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={setPassword}
+          placeholder="Password *"
+          placeholderTextColor="#999999"
+          secureTextEntry
+        />
+      </View>
+        <Button title='prueba' onPress={handleLogin}/>
+      <View/>
+      <View style={{ alignSelf: "center", flexDirection: "row" }}>
+        <Text style={styles.text}>¿Nuevo en GameIt?</Text>
+        <TouchableWithoutFeedback onPress={() => Alert.alert('aqui te lleva a la pag de registro')}>
+          <Text style={styles.text}> Registrate Aqui</Text>
+        </TouchableWithoutFeedback>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexGrow: 1,
     paddingHorizontal: 30,
-    backgroundColor: "#161616",
+    justifyContent: "center",
+    marginTop: Constants.statusBarHeight,
+    backgroundColor: "#181818",
   },
   title: {
-    fontSize: 30,
+    fontSize: 50,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: "#FFFFFF",
   },
   subtitle: {
-    fontSize: 16,
-    marginBottom: 30,
+    fontSize: 20,
+    padding: 10,
+    marginBottom: 20,
+    color: "#FFFFFF",
   },
   input: {
     height: 40,
-    backgroundColor: '#f1f1f1',
+    width: 300,
+    borderColor: "gray",
+    borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 10,
   },
+  button: {
+    backgroundColor: "green",
+  },
   text: {
     marginTop: 15,
+    color: "#FFFFFF",
   },
 });
 
