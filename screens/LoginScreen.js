@@ -3,6 +3,7 @@ import { Alert, View, Text, TextInput, Button, StyleSheet, TouchableWithoutFeedb
 import Constants from 'expo-constants'
 import { StatusBar } from 'expo-status-bar';
 
+
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -24,6 +25,7 @@ const LoginScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           value={username}
+          color = "white"
           onChangeText={setUsername}
           placeholder="Email or username *"
           placeholderTextColor="#999999"
@@ -33,6 +35,7 @@ const LoginScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           value={password}
+          color = "white"
           onChangeText={setPassword}
           placeholder="Password *"
           placeholderTextColor="#999999"
