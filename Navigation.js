@@ -1,10 +1,11 @@
 import react from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //pantarijillas
 import HomeScreen from "./screens/HomeScreen";
 import SearchScreen from "./screens/SearchScreen";
-import ShareScreen from "./screens/ShareScreen";
+import GroupScreen from "./screens/GroupScreen";
 import ChatScreen from "./screens/ChatScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 //iconos
@@ -15,7 +16,10 @@ const Tab = createBottomTabNavigator();
 
 function Tabs(){
     return(
-        <Tab.Navigator initialRouteName="Home" screenOptions={{tabBarActiveBackgroundColor: 'gray', tabBarActiveTintColor: 'white'}}>
+        <Tab.Navigator initialRouteName="Home" 
+        screenOptions={{tabBarActiveBackgroundColor: 'gray', 
+        tabBarActiveTintColor: 'white', tabBarStyle: {backgroundColor: "#2B2B2B",}, 
+        headerStyle: {backgroundColor: "#2B2B2B",}, headerTintColor: 'white'}} >
             <Tab.Screen name = "Home" component={HomeScreen}
             options={{
                 tabBarIcon: ({color,size}) => (
@@ -26,10 +30,10 @@ function Tabs(){
             options={{
                 tabBarIcon: ({color,size}) => (
                     <MaterialCommunityIcons name="magnify" size={24} color="black" />
-                ),
+                )
                 }}            
             />
-            <Tab.Screen name = "Share" component={ShareScreen}
+            <Tab.Screen name = "Grupos" component={GroupScreen}
               
             />
             <Tab.Screen name = "chat" component={ChatScreen}
