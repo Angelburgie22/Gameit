@@ -3,5 +3,9 @@ ESTA MADRE LA AGREGUE POR SI SE NECESITAN INSTALAR DESPUES DE UN PULL
 npm install @react-navigation/native
 npm install @react-navigation/bottom-tabs
 npm install @react-navigation/native-stack
+npm install @react-navigation/material-top-tabs
 npx expo install react-native-gesture-handler
+npx expo install react-native-tab-view
+npx expo install react-native-reanimated
+npx expo install react-native-pager-view
 npx expo install react-native-screens react-native-safe-area-context

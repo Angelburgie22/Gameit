@@ -3,7 +3,7 @@ import { Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  Tou
 
 const ProfileScreen = () => {
     return(
-        <View>
+        <View style = {{backgroundColor : "#404040", flex : 1}}>
             <Text style = {{fontSize: 30, textAlign: "center", marginTop: "20%"}}>ProfileScreen</Text>
         </View>
     );

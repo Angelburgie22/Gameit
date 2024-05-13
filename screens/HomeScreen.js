@@ -1,10 +1,10 @@
 import React from 'react';
 import { Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import Tweets from '../components/tweets';
 const HomeScreen = () => {
     return(
-        <View style = {{backgroundColor : "#4F4F4F", flex : 1}}>
+        <View style = {{backgroundColor : "#404040", flex : 1}}>
             <View style = {{flexDirection : "row", justifyContent: "space-around"}}>
             <TouchableOpacity style = {styles.Buttons}>
                 <Text style = {styles.Text}>Todo</Text>
@@ -15,7 +15,10 @@ const HomeScreen = () => {
             <TouchableOpacity style = {styles.Buttons}>
                 <Text style = {styles.Text}>Comunidades</Text>
             </TouchableOpacity>       
-            </View>    
+            </View>  
+            <View>
+                <Tweets/>
+            </View>
         </View>
     );
 };
