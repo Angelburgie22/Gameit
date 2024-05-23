@@ -7,7 +7,7 @@ const Tweets = () => {
         <FlatList data ={prueba}
         ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={({item : tweets}) => (
-            <View key = {tweets.id} style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1}}>
+            <View key = {tweets.id} style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width: "95%", alignSelf: "center"}}>
                 <View style = {{flexDirection: "row"}}>
                     <View style = {{padding: 10}}>
                         <Image style = {styles.image} source={{uri : tweets.avatar}}/>
@@ -40,6 +40,7 @@ const Tweets = () => {
                     <Text style = {styles.text}>{tweets.retweetCount}</Text>
                     </View>             
                 </View>
+                <View style = {{padding: 10}}/>
             </View>
         )}/>
     )

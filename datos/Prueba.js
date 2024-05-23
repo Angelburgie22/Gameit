@@ -10,6 +10,7 @@ export default [
         retweetCount: 2,
         replyCount: 1,
         likeCount: 5,
+        players: 1,
     },
     {
         name: "Nose",
@@ -22,6 +23,7 @@ export default [
         retweetCount: 2,
         replyCount: 1,
         likeCount: 5,
+        players: 2,
     },
     {
         name: "Ekizde",
@@ -34,6 +36,7 @@ export default [
         retweetCount: 2,
         replyCount: 1,
         likeCount: 5,
+        players: 3,
     },
     {
         name: "Jijijija",
@@ -46,6 +49,7 @@ export default [
         retweetCount: 2,
         replyCount: 1,
         likeCount: 5,
+        players: 4,
     },
     {
         name: "Pro123",
@@ -58,6 +62,7 @@ export default [
         retweetCount: 2,
         replyCount: 1,
         likeCount: 5,
+        players: 1,
     },
 
 ]

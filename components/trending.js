@@ -1,6 +1,5 @@
 import React from "react";
 import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
-import prueba, { tweets } from "../datos/Prueba";
 import trending, {tren} from "../datos/trending";
 
 const Trending = () => {
