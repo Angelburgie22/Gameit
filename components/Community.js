@@ -1,12 +1,8 @@
 import React from "react";
 import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
 import prueba, { tweets } from "../datos/Prueba";
-import { useNavigation } from "@react-navigation/native";
 
-
-
-const Tweets = () => {
-    const navigation = useNavigation();
+const Result = () => {
     return(
         <FlatList data ={prueba}
         ItemSeparatorComponent={() => <Text> </Text>}
@@ -52,6 +48,7 @@ const Tweets = () => {
     )
 }
 
+
 const styles = StyleSheet.create({
     image : {
         width: 48,
@@ -71,4 +68,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Tweets
+export default Result

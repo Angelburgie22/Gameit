@@ -1,11 +1,9 @@
 import React from 'react';
-import { Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
-import Trending from '../components/trending';
-import { useNavigation } from "@react-navigation/native";
+import { Alert, View, Text, TextInput, ScrollView, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
+import Result from '../components/Community';
 
-const SearchScreen = () => {
-    const navigation = useNavigation();
-    return(      
+const Results = () => {
+    return(
         <View style = {{backgroundColor : "#404040", flex : 1}}>
             <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
                     <TextInput
@@ -15,17 +13,14 @@ const SearchScreen = () => {
                         placeholderTextColor="#999999"
                     />               
 
-                    <TouchableOpacity style = {styles.Buttons} onPress={() => navigation.navigate("results")}>
+                    <TouchableOpacity style = {styles.Buttons}>
                         <Text style = {styles.Text}>Buscar</Text>
                     </TouchableOpacity>
 
-            </View>
-            <View style = {{padding: 10}}>
-                <Text style = {{fontSize: 20, color : "white", fontWeight: "bold"}}>Tendencias</Text>
-            </View>
-            <View>
-                <Trending/>
-            </View>                     
+            </View>  
+            <ScrollView>
+                <Result/>
+            </ScrollView>          
         </View>
     );
 };
@@ -58,4 +53,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default SearchScreen;
+export default Results;
