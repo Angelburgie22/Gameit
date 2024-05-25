@@ -5,18 +5,7 @@ import Tweets from '../components/tweets';
 const HomeScreen = () => {
     return(
         <View style = {{backgroundColor : "#404040", flex : 1}}>
-            <View style = {{flexDirection : "row", justifyContent: "space-around"}}>
-            <TouchableOpacity style = {styles.Buttons}>
-                <Text style = {styles.Text}>Todo</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.Buttons}>
-                <Text style = {styles.Text}>VideoJuegos</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.Buttons}>
-                <Text style = {styles.Text}>Comunidades</Text>
-            </TouchableOpacity>       
-            </View>  
-            <View>
+            <View style = {{marginTop: 20}}>
                 <Tweets/>
             </View>
         </View>
