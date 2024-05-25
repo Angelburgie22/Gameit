@@ -13,7 +13,7 @@ const Tweets = () => {
         renderItem={({item : tweets}) => (
             <View key = {tweets.id} style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width: "95%", alignSelf: "center"}}>
                 <View style = {{flexDirection: "row"}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
                     <View style = {{padding: 10}}>
                         <Image style = {styles.image} source={{uri : tweets.avatar}}/>
                     </View>
@@ -34,7 +34,7 @@ const Tweets = () => {
                         <Text style = {styles.text}>{tweets.likeCount}</Text>
                     </View>
                     <View style= {{flexDirection: "row"}}>
-                        <TouchableOpacity onPress={() => navigation.navigate("coment")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Comentarios")}>
                             <Text style = {styles.text}>Comentarios: </Text>             
                         </TouchableOpacity>
                         <Text style = {styles.text}>{tweets.replyCount}</Text>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Alert, View, Text, TextInput, ScrollView, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
-import Result from '../components/Community';
+import ResultC from '../components/results/Community';
+import GroupPost from '../components/groups/grouppost';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Results = () => {
     return(
@@ -19,7 +21,14 @@ const Results = () => {
 
             </View>  
             <ScrollView>
-                <Result/>
+                <View style = {{padding: 10}}>
+                    <Text style = {{fontSize: 20, color : "white", fontWeight: "bold"}}>Comunidades</Text>
+                </View>
+                <ResultC/>
+                <View style = {{padding: 10}}>
+                    <Text style = {{fontSize: 20, color : "white", fontWeight: "bold"}}>Grupos de juego</Text>
+                </View>
+                <GroupPost/>
             </ScrollView>          
         </View>
     );

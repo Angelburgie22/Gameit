@@ -15,7 +15,7 @@ const SearchScreen = () => {
                         placeholderTextColor="#999999"
                     />               
 
-                    <TouchableOpacity style = {styles.Buttons} onPress={() => navigation.navigate("results")}>
+                    <TouchableOpacity style = {styles.Buttons} onPress={() => navigation.navigate("Resultados")}>
                         <Text style = {styles.Text}>Buscar</Text>
                     </TouchableOpacity>
 
@@ -23,7 +23,7 @@ const SearchScreen = () => {
             <View style = {{padding: 10}}>
                 <Text style = {{fontSize: 20, color : "white", fontWeight: "bold"}}>Tendencias</Text>
             </View>
-            <View>
+            <View style={{flexDirection: "row"}}>
                 <Trending/>
             </View>                     
         </View>
