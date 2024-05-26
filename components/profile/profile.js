@@ -2,6 +2,7 @@ import React from "react";
 import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
 import Prueba, {Prof} from "../../datos/Prueba";
 import { Ionicons } from '@expo/vector-icons';
+import Tweets from "../tweets";
 
 const Profiles = () => {
     return(
@@ -33,45 +34,8 @@ const Profiles = () => {
                     </View>
                 </View>
             </View>
-            <View style = {{marginTop : 10}}>
-                {Prueba.map(pru => (
-                <View key = {pru.id} style = {{paddingTop: 5, marginBottom: 15, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width: "95%",    alignSelf: "center"}}>
-                    <View style = {{flexDirection: "row"}}>
-                        <View style = {{padding: 10}}>
-                            <Image style = {styles.imagepost} source={{uri : pru.avatar}}/>
-                        </View>
-                        <View>
-                            <Text style = {styles.namepost}>{pru.name}</Text>
-                            <Text style = {{color : "gray"}}>{pru.screenName}</Text>
-                        </View>
-                    </View>
-                    <View style = {{paddingBottom: 7, flex: 1}}>
-                        <Text style = {styles.contentxt}>{pru.fullText}</Text>
-                    </View>
-                    <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
-                        <View style= {{flexDirection: "row"}}>
-                            <TouchableOpacity>
-                                <Text style = {styles.text}>Likes: </Text>             
-                            </TouchableOpacity>
-                            <Text style = {styles.text}>{pru.likeCount}</Text>
-                        </View>
-                        <View style= {{flexDirection: "row"}}>
-                            <TouchableOpacity>
-                                <Text style = {styles.text}>Comentarios: </Text>             
-                            </TouchableOpacity>
-                            <Text style = {styles.text}>{pru.replyCount}</Text>
-                        </View>
-                        <View style= {{flexDirection: "row"}}>
-                            <TouchableOpacity>
-                                <Text style = {styles.text}>Compartidos: </Text>             
-                            </TouchableOpacity>
-                            <Text style = {styles.text}>{pru.retweetCount}</Text>
-                        </View>             
-                    </View>
-                    <View style = {{padding: 10}}/>
-                    
-                </View>
-                ))}
+            <View style = {{marginTop: 10}}>
+                <Tweets/>
             </View>
         </View>
     )
