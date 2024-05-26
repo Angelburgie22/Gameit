@@ -10,12 +10,12 @@ const CommunityPage = () => {
         <View style = {{flex: 1}}>
             <View style = {{flexDirection: "row"}}>
                 <View style= {{margin: 10}}>
-                    <Image style = {styles.image} source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}}></Image>
+                    <Image style = {styles.image} source={{uri : "https://yt3.googleusercontent.com/ytc/AIdro_m0DtuBhZUI1Mie9JUspzzqediBM76hO49vWA8hM5hwu9s=s900-c-k-c0x00ffffff-no-rj"}}></Image>
                 </View>
                 
                 <View style={{justifyContent: "center"}}>
                     <View>
-                        <Text style= {styles.text}>Comunidad Nombre</Text>
+                        <Text style= {styles.text}>Clash Royale</Text>
                     </View>
                     <View>
                         <Text style = {styles.description}>0 Seguidores</Text>
@@ -30,7 +30,7 @@ const CommunityPage = () => {
                 </View>
             </View>
             <View>
-                <Text style = {styles.description}>Descripcion de comunidad</Text>
+                <Text style = {styles.description}>comunidad para jugar clash royale</Text>
             </View>
         </View>
     )

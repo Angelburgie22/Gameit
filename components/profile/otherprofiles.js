@@ -13,10 +13,10 @@ const OtherProfiles = () => {
                 </View>
                 <View style = {{justifyContent: "center", marginRight: 150}}>
                     <View>
-                        <Text style = {styles.name}> Nombre</Text>
+                        <Text style = {styles.name}> Ferran</Text>
                     </View>
                     <View>
-                        <Text style = {styles.text}> @Usuario</Text>
+                        <Text style = {styles.text}> @Fierran</Text>
                     </View>
                 </View>
                 <View style = {{justifyContent: "center"}}>

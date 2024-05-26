@@ -7,6 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 
 const ResultC = () => {
+    const navigation = useNavigation();
     return(   
         <FlatList 
         data ={Communitys}

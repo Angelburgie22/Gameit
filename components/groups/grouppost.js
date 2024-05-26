@@ -1,94 +1,107 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
-import Prueba, {Groups} from "../../datos/Prueba";
+import { Image, FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const GroupPost = () => {
-    const [posts, setPosts] = useState([]);
+    const [groups, setGroups] = useState([]);
 
     useEffect(() => {
         axios.get("https://gameit-d77d4db89096.herokuapp.com/api/post/get_posts")
-        .then((response) => setPosts(response.data)).catch((err) => console.log(err))
-    },[]);
+            .then((response) => {
+                if (response.data && response.data.posts) {
+                    setGroups(response.data.posts);
+                } else {
+                    console.log("Invalid response structure:", response.data);
+                }
+            })
+            .catch((err) => console.log(err));
+    }, []);
 
-    const resderGroupCard = ({item})=>{
-        return(
-            <View style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width:"85%", alignSelf:"center"}}>
-                <View style = {{flexDirection: "row"}}>
-                    <View style = {{padding: 10}}>
-                        <Image style = {styles.image} source={{uri : item.photo_url }}/>
-                    </View>
+    const renderGroupCard = ({ item }) => {
+        return (
+            <View style={styles.card}>
+                <View style={styles.header}>
+                    <Image style={styles.image} source={{ uri: item.photo_url }} />
                     <View>
-                        <Text style = {styles.name}>{ item.user }</Text>
-                        <Text style = {{color : "gray"}}>{ item.username }</Text>
+                        <Text style={styles.name}>{item.user}</Text>
+                        <Text style={styles.username}>{item.username}</Text>
                     </View>
                 </View>
-                <View>
-                    <Image  style = {styles.post} source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}}/>
-                </View>
-                <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
-                    <TouchableOpacity style = {styles.Buttons}>
-                        <Text style = {styles.TextButton}>Unirse a Grupo</Text>
+                <Image style={styles.post} source={{ uri: item.post.photo_url }} />
+                <View style={styles.footer}>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>Unirse a Grupo</Text>
                     </TouchableOpacity>
-                    <View style>
-                        <Text style = {styles.TextButton}>{item.id} / 4</Text>
-                    </View>
-                </View>
-                <View style={{height: 28}}>
-                    
+                    <Text style={styles.groupInfo}>{item.post.grouppost_id} / 4</Text>
                 </View>
             </View>
-        )
-    }
-    return(
-        <FlatList 
-        data ={posts}
-        keyExtractor={(item) => item}
-        ItemSeparatorComponent={() => <Text> </Text>}
-        renderItem={resderGroupCard}/>
-            
-    )
-}
+        );
+    };
+
+    return (
+        <FlatList
+            data={groups}
+            keyExtractor={(item) => item.user_id.toString()}
+            renderItem={renderGroupCard}
+            ItemSeparatorComponent={() => <View style={styles.separator} />}
+        />
+    );
+};
 
 const styles = StyleSheet.create({
-    image : {
+    card: {
+        paddingTop: 10,
+        backgroundColor: "#4F4F4F",
+        borderRadius: 10,
+        flex: 1,
+        width: "85%",
+        alignSelf: "center"
+    },
+    header: {
+        flexDirection: "row",
+        padding: 10
+    },
+    image: {
         width: 48,
         height: 48,
         borderRadius: 30
     },
-    name : {
+    name: {
         fontSize: 18,
         color: "white"
     },
-    contentxt : {
-        color : "white",
-        fontWeight: "bold"
+    username: {
+        color: "gray"
     },
-    text : {
-        color : "white"
-    },
-    post : {
+    post: {
         width: 200,
         height: 200,
         alignSelf: "center",
-        padding: 10
+        marginTop: 10
     },
-    Buttons:{
+    footer: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginVertical: 10
+    },
+    button: {
         backgroundColor: "#31CE40",
-        borderRadius:3,
+        borderRadius: 3,
         width: "40%",
         height: 30,
-        marginTop: "3%",
+        justifyContent: "center"
     },
-    TextButton:{
+    buttonText: {
         color: "white",
-        borderColor: "black",
-        textAlign: "center",
-        padding: 10,
+        textAlign: "center"
+    },
+    groupInfo: {
+        color: "white",
+        textAlign: "center"
+    },
+    separator: {
+        height: 20
     }
+});
 
-
-
-})
-
-export default GroupPost
+export default GroupPost;

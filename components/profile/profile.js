@@ -36,7 +36,7 @@ const Profiles = (props) => {
                         <Text style = {styles.name}>Seguidores</Text>
                     </View>
                     <View style = {{alignSelf : 'center'}}>
-                        <Text style = {styles.text}>{ user_profile.followers_count }</Text>
+                        <Text style = {styles.text}>0</Text>
                     </View>
                 </View>
                 <View>
@@ -44,7 +44,7 @@ const Profiles = (props) => {
                         <Text style = {styles.name}>Siguiendo</Text>
                     </View>
                     <View style = {{alignSelf : 'center'}}>
-                        <Text style = {styles.text}>{ user_profile.following_count }</Text>
+                        <Text style = {styles.text}>0</Text>
                     </View>
                 </View>
             </View>
