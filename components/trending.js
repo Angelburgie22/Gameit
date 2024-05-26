@@ -4,33 +4,22 @@ import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,Toucha
 import trending, {tren} from "../datos/trending";
 
 const Trending = () => {
-    const [users,setUsers] = useState([]);
-
-    useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then((response) => setUsers(response.data)).catch((err) => console.log(err))
-    },[]);
-
-    const resderTrendCard = ({item})=>{
-        return(
+    return(
+        <FlatList 
+        data ={trending}
+        ItemSeparatorComponent={() => <Text> </Text>}
+        renderItem={({item : trend}) =>(
             <View style = {{backgroundColor: "#4F4F4F"}}>
                 <View style = {{flexDirection: "row"}}>
                     <View style ={{padding: 10}}>
-                        <Image style = {styles.image}source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}} ></Image>
+                        <Image style = {styles.image}source={{uri : trend.photo}} ></Image>
                     </View>
                     <View style = {{justifyContent: "center"}}>
-                        <Text style = {styles.text}>{item.name}</Text>
+                        <Text style = {styles.text}>{trend.name}</Text>
                     </View>
                 </View>
             </View>
-        )
-    }
-    return(
-        <FlatList 
-        data ={users}
-        keyExtractor={(item) => item.id.toString()}
-        ItemSeparatorComponent={() => <Text> </Text>}
-        renderItem={resderTrendCard}/>
+        )}/>
     )
 }
 

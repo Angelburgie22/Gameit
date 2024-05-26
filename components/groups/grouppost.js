@@ -19,7 +19,7 @@ const GroupPost = () => {
                         <Image style = {styles.image} source={{uri : item.photo_url }}/>
                     </View>
                     <View>
-                        <Text style = {styles.name}>{ item.name }</Text>
+                        <Text style = {styles.name}>{ item.user }</Text>
                         <Text style = {{color : "gray"}}>{ item.username }</Text>
                     </View>
                 </View>
