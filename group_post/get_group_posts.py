@@ -7,14 +7,29 @@ from models import GroupPost, UserAccount
 def get_posts():
     session = db.session
 
-    # Query posts with joined UserAccount to get profile_id
-    posts = session.query(GroupPost, UserAccount).options(joinedload(GroupPost.poster)).all()
+    posts = GroupPost.query.all()
 
-    # Construct result dictionary
     result = {
         'success': True,
-        'posts': [{'user_id': user.account_id, 'username': user.username, 'post': post} for post, user in posts]
+        'posts': []
     }
+
+    for post in posts:
+        user = session.get(UserAccount, post.poster_id)
+
+        post_data = {
+            'post_id': post.post_id,
+            'title': post.title,
+            'text': post.text,
+            'creation_date': post.creation_date,
+            'replies_count': post.replies_count,
+            'votes_count': post.votes_count,
+            'user_id': user.account_id,
+            'user': user.name,
+            'username': user.username
+        }
+
+        result['posts'].append({'user_id': user.account_id, 'user': user.name, 'username': user.username, 'photo_url': user.photo_url, 'post': post_data})
 
     session.commit()
     return result

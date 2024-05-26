@@ -12,7 +12,14 @@ def get_subreddits():
 
     result = {
         'success': True,
-        'subreddits': subreddits
+        'subreddits': [{
+            'subreddit_id': subreddit.subreddit_id,
+            'name': subreddit.name,
+            'description': subreddit.description,
+            'created_date': subreddit.created_date.isoformat(),
+            'creator': subreddit.creator.username,
+            'followers_count': subreddit.followers.count()
+        } for subreddit in subreddits]
     }
 
     session.commit()

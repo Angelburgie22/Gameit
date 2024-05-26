@@ -109,6 +109,7 @@ class Post(Model):
     text: Mapped[str] = mapped_column(String(120), nullable=False)
     creation_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
     replies_count: Mapped[int] = mapped_column(Integer, default=0)
+    shares_count: Mapped[int] = mapped_column(Integer, default=0)
     votes_count: Mapped[int] = mapped_column(Integer, default=0)
     poster_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), nullable=False)
     
@@ -121,8 +122,6 @@ class GroupPost(Model):
     title: Mapped[str] = mapped_column(String(40), nullable=False)
     text: Mapped[str] = mapped_column(String(120), nullable=False)
     creation_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
-    replies_count: Mapped[int] = mapped_column(Integer, default=0)
-    votes_count: Mapped[int] = mapped_column(Integer, default=0)
     poster_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), nullable=False)
     
     poster: Mapped['UserAccount'] = relationship('UserAccount', back_populates='group_posts')

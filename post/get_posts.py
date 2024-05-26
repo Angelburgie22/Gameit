@@ -29,7 +29,7 @@ def get_posts():
             'username': user.username
         }
 
-        result['posts'].append({'user_id': user.account_id, 'user': user.name, 'username': user.username, 'post': post_data})
+        result['posts'].append({'user_id': user.account_id, 'user': user.name, 'username': user.username, 'photo_url': user.photo_url, 'post': post_data})
 
     session.commit()
     return result

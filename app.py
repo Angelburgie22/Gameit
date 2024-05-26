@@ -34,7 +34,7 @@ app.register_blueprint(subreddits_bp)
 
 from setup_db import setup_database
 
-# setup_database(app)
+setup_database(app)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
