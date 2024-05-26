@@ -4,10 +4,10 @@ import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,Toucha
 import Prueba, {Groups} from "../../datos/Prueba";
 
 const GroupPost = () => {
-    const [users,setUsers] = useState([]);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
+        axios.get("https://gameit-d77d4db89096.herokuapp.com/api/post/get_posts")
         .then((response) => setUsers(response.data)).catch((err) => console.log(err))
     },[]);
 
@@ -16,11 +16,11 @@ const GroupPost = () => {
             <View style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width:"85%", alignSelf:"center"}}>
                 <View style = {{flexDirection: "row"}}>
                     <View style = {{padding: 10}}>
-                        <Image style = {styles.image} source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}}/>
+                        <Image style = {styles.image} source={{uri : item.photo_url }}/>
                     </View>
                     <View>
-                        <Text style = {styles.name}>{item.name}</Text>
-                        <Text style = {{color : "gray"}}>{item.username}</Text>
+                        <Text style = {styles.name}>{ item.name }</Text>
+                        <Text style = {{color : "gray"}}>{ item.username }</Text>
                     </View>
                 </View>
                 <View>
@@ -42,8 +42,8 @@ const GroupPost = () => {
     }
     return(
         <FlatList 
-        data ={users}
-        keyExtractor={(item) => item.id.toString()}
+        data ={posts}
+        keyExtractor={(item) => item}
         ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={resderGroupCard}/>
             

@@ -1,5 +1,4 @@
 import React from "react";
-import "react-native-gesture-handler";
 import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,TouchableOpacity,  TouchableWithoutFeedback} from 'react-native';
 import Communitys from "../../datos/Communitys";
 import { ScrollView } from "react-native-gesture-handler";

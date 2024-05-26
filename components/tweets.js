@@ -4,24 +4,28 @@ import prueba, { tweets } from "../datos/Prueba";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 
-
-
 const Tweets = () => {
     const navigation = useNavigation();
-    const [users,setUsers] = useState([]);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then((response) => setUsers(response.data)).catch((err) => console.log(err))
-    },[]);
+        axios.get("https://gameit-d77d4db89096.herokuapp.com/api/post/get_posts")
+        .then((response) => {
+            console.log("Response:", response.data); // Print the response data
+            setPosts(response.data.posts);
+        })
+        .catch((err) => console.log(err));
+    }, []);
 
     const resderUserCard = ({item})=>{
+        const user_id = item.user_id;
+
         return(
             <View  style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width: "95%", alignSelf: "center"}}>
                 <View style = {{flexDirection: "row"}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
+                    <TouchableOpacity onPress={() => navigation.navigate("Perfil", { user_id })}>
                     <View style = {{padding: 10}}>
-                        <Image style = {styles.image} source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}}/>
+                        <Image style = {styles.image} source={{uri : item.photo_url}}/>
                     </View>
                     </TouchableOpacity>
                     <View>
@@ -30,26 +34,26 @@ const Tweets = () => {
                     </View>
                 </View>
                 <View style = {{paddingBottom: 7, flex: 1}}>
-                    <Text style = {styles.contentxt}>{item.email}</Text> 
+                    <Text style = {styles.contentxt}>{item.post.text}</Text> 
                 </View>
                 <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
                     <View style= {{flexDirection: "row"}}>
                         <TouchableOpacity>
                             <Text style = {styles.text}>Likes: </Text>             
                         </TouchableOpacity>
-                        <Text style = {styles.text}>{item.id}</Text>  
+                        <Text style = {styles.text}>{item.post.votes_count}</Text>  
                     </View>
                     <View style= {{flexDirection: "row"}}>
                         <TouchableOpacity onPress={() => navigation.navigate("Comentarios")}>
                             <Text style = {styles.text}>Comentarios: </Text>             
                         </TouchableOpacity>
-                        <Text style = {styles.text}>{item.id}</Text>
+                        <Text style = {styles.text}>{item.post.replies_count}</Text>
                     </View>
                     <View style= {{flexDirection: "row"}}>
                         <TouchableOpacity>
                             <Text style = {styles.text}>Compartidos: </Text>             
                         </TouchableOpacity>
-                    <Text style = {styles.text}>{item.id}</Text>
+                    <Text style = {styles.text}>{item.post.shares_count}</Text>
                     </View>             
                 </View>
                 <View style = {{padding: 10}}/>
@@ -57,9 +61,11 @@ const Tweets = () => {
         )
     }
 
+    console.log("Huh: " + posts);
+    
     return(
-        <FlatList data ={users}
-        keyExtractor={(item) => item.id.toString()}
+        <FlatList data ={posts}
+        keyExtractor={(item) => item}
         ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={resderUserCard}/>
     )
