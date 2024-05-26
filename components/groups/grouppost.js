@@ -7,11 +7,12 @@ const GroupPost = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        axios.get("https://gameit-d77d4db89096.herokuapp.com/api/post/get_posts")
-        .then((response) => setUsers(response.data)).catch((err) => console.log(err))
+        axios.get("https://gameit-d77d4db89096.herokuapp.com/api/group_post/get_posts")
+        .then((response) => {console.log("Response:", response.data); setPosts(response.data);}).catch((err) => console.log(err))
     },[]);
 
     const resderGroupCard = ({item})=>{
+        console.log(posts);
         return(
             <View style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width:"85%", alignSelf:"center"}}>
                 <View style = {{flexDirection: "row"}}>
@@ -19,19 +20,19 @@ const GroupPost = () => {
                         <Image style = {styles.image} source={{uri : item.photo_url }}/>
                     </View>
                     <View>
-                        <Text style = {styles.name}>{ item.name }</Text>
+                        <Text style = {styles.name}>{ item.user }</Text>
                         <Text style = {{color : "gray"}}>{ item.username }</Text>
                     </View>
                 </View>
                 <View>
-                    <Image  style = {styles.post} source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}}/>
+                    <Image  style = {styles.post} source={{uri : item.post.photo_url}}/>
                 </View>
                 <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
                     <TouchableOpacity style = {styles.Buttons}>
                         <Text style = {styles.TextButton}>Unirse a Grupo</Text>
                     </TouchableOpacity>
                     <View style>
-                        <Text style = {styles.TextButton}>{item.id} / 4</Text>
+                        <Text style = {styles.TextButton}>{item.post.grouppost_id} / 4</Text>
                     </View>
                 </View>
                 <View style={{height: 28}}>
