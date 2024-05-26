@@ -12,8 +12,8 @@ from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
 default_config = {
-        'database_uri': f'postgresql://{os.getenv("PSQL_USER")}:{os.getenv("PSQL_PASSWD")}@127.0.0.1/{os.getenv("PSQL_BD")}',
-        'database_echo': True,
+	'database_uri': os.getenv('DATABASE_URL')
+	'database_echo': True,
         'flask_app_name': __name__
         }
 
