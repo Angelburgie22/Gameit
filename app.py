@@ -17,26 +17,22 @@ default_config = {
         'flask_app_name': __name__
         }
 
-def create_app(config=default_config):
-    app = Flask(config['flask_app_name'])
+app = Flask(default_config['flask_app_name'])
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = config['database_uri']
-    app.config['SQLALCHEMY_ECHO'] = config['database_echo']
+app.config['SQLALCHEMY_DATABASE_URI'] = default_config['database_uri']
+app.config['SQLALCHEMY_ECHO'] = default_config['database_echo']
 
-    db.init_app(app)
+db.init_app(app)
 
-    app.register_blueprint(session_bp)
-    app.register_blueprint(group_posts_bp)
-    app.register_blueprint(posts_bp)
-    app.register_blueprint(profiles_bp)
-    app.register_blueprint(subreddits_bp)
+app.register_blueprint(session_bp)
+app.register_blueprint(group_posts_bp)
+app.register_blueprint(posts_bp)
+app.register_blueprint(profiles_bp)
+app.register_blueprint(subreddits_bp)
 
-    return app
+from setup_db import setup_database
+
+setup_db(app)
 
 if __name__ == '__main__':
-    from setup_db import setup_database
-
-    setup_database()
-
-    app = create_app()
     app.run(debug=True, host='0.0.0.0')
