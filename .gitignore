@@ -1,3 +1,4 @@
 venv/
 __pycache__/
 repo_models.py
+bin_txt

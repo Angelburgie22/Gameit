@@ -121,6 +121,7 @@ class GroupPost(Model):
     grouppost_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     title: Mapped[str] = mapped_column(String(40), nullable=False)
     text: Mapped[str] = mapped_column(String(120), nullable=False)
+    photo_url: Mapped[Optional[str]] = mapped_column(String(254))
     creation_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
     poster_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), nullable=False)
     
