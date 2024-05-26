@@ -6,7 +6,6 @@ from auth.auth import get_active_session, active_session_decorator as active_ses
 from .bp import bp
 
 @bp.route('/<int:user_id>')
-@active_session
 def get_subreddits(user_id):
     session = db.session
 
