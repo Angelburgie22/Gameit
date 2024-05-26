@@ -29,7 +29,7 @@ const Tweets = () => {
                     </View>
                     </TouchableOpacity>
                     <View>
-                        <Text style = {styles.name}>{item.name}</Text>
+                        <Text style = {styles.name}>{item.user}</Text>
                         <Text style = {{color : "gray"}}>{item.username}</Text>
                     </View>
                 </View>

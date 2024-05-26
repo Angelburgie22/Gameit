@@ -21,7 +21,7 @@ const Request = () => {
                         <View>
                             <Text style = {styles.name}>{item.name}</Text>
                         <View style= {{flexDirection: "row"}}>
-                            <Text style = {styles.text}>{item.email}</Text>
+                            <Text style = {styles.text}>Quiere conversar</Text>
                         </View>
                     </View>
                 </View>

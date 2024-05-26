@@ -4,38 +4,22 @@ import {Image, FlatList, Alert, View, Text, TextInput, Button, StyleSheet,Toucha
 import Prueba, {relates} from "../../datos/Prueba";
 
 const Relates = () => {
-    const [users,setUsers] = useState([]);
 
-    useEffect(() => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
-        .then((response) => setUsers(response.data)).catch((err) => console.log(err))
-    },[]);
-
-    const resderChatCard = ({item})=>{
         return(
             <View>
                 <View style = {{flexDirection: "row"}}>
                         <View style = {{paddingRight: 5}}>
-                            <Image style = {styles.image} source={{uri : "https://i.pinimg.com/564x/0c/bb/aa/0cbbaab0deff7f188a7762d9569bf1b3.jpg"}}></Image>
+                            <Image style = {styles.image} source={{uri : "https://static.wikia.nocookie.net/pou/images/8/8d/Pou.png/revision/latest/thumbnail/width/360/height/360?cb=20220622133315"}}></Image>
                         </View>
                         <View>
-                            <Text style = {styles.name}>{item.name}</Text>
+                            <Text style = {styles.name}>Pedro</Text>
                         <View style= {{flexDirection: "row"}}>
-                            <Text style = {styles.text}>{item.email}</Text>
+                            <Text style = {styles.text}>Un uve?</Text>
                         </View>
                     </View>
                 </View>
             </View>
         )
-    }
-
-    return(
-        <FlatList 
-        data ={users}
-        keyExtractor={(item) => item.id.toString()}
-        ItemSeparatorComponent={() => <Text> </Text>}
-        renderItem={resderChatCard}/>
-    )
 }
 
 
