@@ -27,10 +27,10 @@ def setup_database(app):
             ('scrypt:32768:8:1$GRorJxzcqvRI6LTL$df1bb25a094789c0f66be02f3fb9e9629f4b507790f1a133457fba54e42cc895534c0448c9997d82b6da299cce80df35e24f2fb68f15144812f4e491a178095e', 3);
         """))
         db.session.execute(sqlalchemy.text("""
-            INSERT INTO post (title, text, replies_count, votes_count, poster_id) VALUES 
-            ('Título', 'Primera publicación', 0, 0, 2), 
-            ('Sí se pudo', 'Puedo descansar en paz?', 0, 0, 1), 
-            ('Anuncio de Kung Fu Panda 5', 'Como dice el título, la segunda venida de Jesucristo', 0, 0, 3);
+            INSERT INTO post (title, text, replies_count, votes_count, shares_count, poster_id) VALUES 
+            ('Título', 'Primera publicación', 0, 0, 0, 2), 
+            ('Sí se pudo', 'Puedo descansar en paz?', 0, 0, 0, 1), 
+            ('Anuncio de Kung Fu Panda 5', 'Como dice el título, la segunda venida de Jesucristo', 0, 0, 0, 3);
         """))
         
         # Commit the changes
