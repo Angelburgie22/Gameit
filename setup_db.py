@@ -15,10 +15,10 @@ def setup_database(app):
         
         # Execute insert statements
         db.session.execute(sqlalchemy.text("""
-            INSERT INTO user_account (name, email, username, cover_url, photo_url, description) VALUES 
-            ('Omar', 'test@gmail.com', 'Burgie Kong', '', 'https://i.redd.it/s4krqgtwnxa71.jpg', 'El Ferran se la ingiere'), 
-            ('Ferran', 'test2@gmail.com', 'Fierran', '', 'https://images.unsplash.com/photo-1625690988276-0a7b0cdf3d5d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'No sé'), 
-            ('Oscar', 'test3@gmail.com', 'Veterinario', '', 'https://images.unsplash.com/photo-1625690988276-0a7b0cdf3d5d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Mimiendo');
+            INSERT INTO user_account (account_id, name, email, username, cover_url, photo_url, description) VALUES 
+            (1, 'Omar', 'test@gmail.com', 'Burgie Kong', '', 'https://i.redd.it/s4krqgtwnxa71.jpg', 'El Ferran se la ingiere'), 
+            (2, 'Ferran', 'test2@gmail.com', 'Fierran', '', 'https://images.unsplash.com/photo-1625690988276-0a7b0cdf3d5d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'No sé'), 
+            (3, 'Oscar', 'test3@gmail.com', 'Veterinario', '', 'https://images.unsplash.com/photo-1625690988276-0a7b0cdf3d5d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'Mimiendo');
         """))
         db.session.execute(sqlalchemy.text("""
             INSERT INTO user_login_credential (passwd_hash, user_id) VALUES 
