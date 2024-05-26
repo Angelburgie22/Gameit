@@ -18,15 +18,10 @@ def get_posts():
         user = session.get(UserAccount, post.poster_id)
 
         post_data = {
-            'post_id': post.post_id,
+            'grouppost_id': post.grouppost_id,
             'title': post.title,
             'text': post.text,
-            'creation_date': post.creation_date,
-            'replies_count': post.replies_count,
-            'votes_count': post.votes_count,
-            'user_id': user.account_id,
-            'user': user.name,
-            'username': user.username
+            'photo_url': post.photo_url
         }
 
         result['posts'].append({'user_id': user.account_id, 'user': user.name, 'username': user.username, 'photo_url': user.photo_url, 'post': post_data})
