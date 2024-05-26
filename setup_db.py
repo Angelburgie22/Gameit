@@ -8,11 +8,11 @@ def setup_database(app):
         metadata.create_all(bind=db.engine)
 
         # Assert that tables are created
-        assert db.engine.has_table('user_account'), "User account table not created"
-        assert db.engine.has_table('user_login_credential'), "User login credential table not created"
-        assert db.engine.has_table('post'), "Post table not created"
+        assert sqlalchemy.inspect(db.engine).has_table('user_account'), 'UserAccount not created'
+	assert sqlalchemy.inspect(db.engine).has_table('user_login_credential'), 'UserLoginCredential not created'
+	assert sqlalchemy.inspect(db.engine).has_table('post'), 'Post not created'
         
-        # Execute insert statements
+	# Execute insert statements
         db.session.execute("""
             INSERT INTO user_account (name, email, username, cover_url, photo_url, description) VALUES 
             ('Omar', 'test@gmail.com', 'Burgie Kong', '', 'https://i.redd.it/s4krqgtwnxa71.jpg', 'El Ferran se la ingiere'), 
