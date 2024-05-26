@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 from secrets import token_urlsafe
 from datetime import datetime, timedelta
 from database import db
-from models import UserAccount, UserSession, UserLoginInfo, CSRF_Token
+from models import UserAccount, UserSession, UserLoginCredential, CSRF_Token
 import re
 
 email_re = re.compile(r"([\w\d._+?!#$%&^'~|\/(){}=*-])+@(((?<=@)|\.)[\w\d]+){2,}")
@@ -25,9 +25,9 @@ def create_user_session(user: str, passwd: str) -> UserSession | None:
         return None
 
     # Busca en la base de datos al usuario según el identificador proporcionado
-    user_id, login_info = db.session.query(UserAccount.id, UserLoginInfo)\
+    user_id, login_info = db.session.query(UserAccount.account_id, UserLoginCredential)\
             .filter(identifier)\
-            .filter(UserLoginInfo.account_id == UserAccount.id)\
+            .filter(UserLoginCredential.user_id == UserAccount.account_id)\
             .one_or_none() or [None, None]
 
     if user_id is None or login_info is None:
@@ -99,4 +99,3 @@ def active_session_decorator(func, handler=lambda *args, **kwargs:abort(401)):
 
     wrapper.__name__ = func.__name__
     return wrapper
-

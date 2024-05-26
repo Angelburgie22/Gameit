@@ -53,4 +53,3 @@ def view(name, metadata, selectable):
         metadata, "before_drop", DropView(name).execute_if(callable_=view_exists)
     )
     return t
-

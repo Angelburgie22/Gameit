@@ -3,3 +3,6 @@ sqlalchemy
 pymysql
 Flask-SQLAlchemy
 pytest
+python-dotenv
+psycopg2-binary
+psycopg2

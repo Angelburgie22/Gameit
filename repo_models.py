@@ -1,4 +1,4 @@
-from sqlalchemy import Table, Column, ForeignKey, UniqueConstraint, func
+from sqlalchemy import Table, Column, ForeignKey, func
 from sqlalchemy import Integer, String, Boolean, BigInteger, Date, DateTime, CheckConstraint
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy.dialects.postgresql import CHAR, SMALLINT, INTERVAL
@@ -44,6 +44,24 @@ class UserAccount(Model):
     posts: Mapped[list['Post']] = relationship('Post', back_populates='poster')
     group_posts: Mapped[list['Post']] = relationship('GroupPost', back_populates='poster')
 
+class EmailValidation(Model):
+    __tablename__ = 'email_validation'
+
+    account_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), primary_key=True)
+    token: Mapped[str] = mapped_column(String(255), nullable=False)
+    is_validated: Mapped[bool] = mapped_column(Boolean, default=False)
+    validation_date: Mapped[Optional[Datetime]] = mapped_column(DateTime)
+    token_expiration: Mapped[Datetime] = mapped_column(DateTime, nullable=False)
+
+class UserLoginInfo(Model):
+    __tablename__ = 'user_login_info'
+
+    account_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id),
+                                    primary_key=True)
+    passwd_hash: Mapped[bytes] = mapped_column(String(128))
+
+    account: Mapped['UserAccount'] = relationship(back_populates='login_info')
+
 class UserSession(Model):
     __tablename__ = 'user_session'
 
@@ -53,6 +71,22 @@ class UserSession(Model):
     expiration_time: Mapped[Datetime] = mapped_column(DateTime)
 
     account: Mapped[Optional['UserAccount']] = relationship(back_populates='logged_sessions')
+
+class CSRF_Token(Model):
+    __tablename__ = 'csrf_token'
+    token: Mapped[bytes] = mapped_column('csrf_token', String(64), primary_key=True)
+    creation_time: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
+    expiration_time: Mapped[Datetime] = mapped_column(DateTime)
+
+class DeactivationProcess():
+    __tablename__ = 'deactivation_process'
+
+    deactivation_id: Mapped[int] = mapped_column('deactivation_id', BigInteger, primary_key=True)
+    account_id: Mapped[int] = mapped_column('account_id', ForeignKey('user_account.account_id'))
+    is_deactivating: Mapped[bool] = mapped_column('status', Boolean, default=True)
+    end_date: Mapped[Datetime] = mapped_column('end_date', DateTime, server_default=func.now()+Timedelta(days=30))
+
+    account: Mapped[Optional['UserAccount']] = relationship(back_populates='deactivation', lazy='noload')
 
 class HashingAlgorithm(Model):
     __tablename__ = 'hashing_algorithm'
@@ -74,12 +108,6 @@ class UserLoginCredential(Model):
     hashing_algorithm: Mapped['HashingAlgorithm'] = relationship(back_populates='login_credential')
 
     account: Mapped['UserAccount'] = relationship(back_populates='login_credential')
-
-class CSRF_Token(Model):
-    __tablename__ = 'csrf_token'
-    token: Mapped[bytes] = mapped_column('csrf_token', String(64), primary_key=True)
-    creation_time: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
-    expiration_time: Mapped[Datetime] = mapped_column(DateTime)
 
 class UserFollower(Model):
     __tablename__ = 'user_follower'
@@ -186,11 +214,7 @@ class PollOption(Model):
     option_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     item: Mapped[str] = mapped_column(String(25), nullable=False)
     votes: Mapped[int] = mapped_column(Integer, default=0)
-
-    __table_args__ = (
-        UniqueConstraint('option_id'),
-    )
-
+ 
     poll: Mapped[Optional['Poll']] = relationship(back_populates='options', lazy='dynamic')
 
 class PollOptionChosen(Model):
