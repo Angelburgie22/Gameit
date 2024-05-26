@@ -37,7 +37,3 @@ def setup_database(app):
         db.session.commit()
 
         print("Database tables and initial data inserted successfully.")
-
-if __name__ == "__main__":
-    setup_database(app)
-
