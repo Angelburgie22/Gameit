@@ -11,8 +11,10 @@ from dotenv import load_dotenv, dotenv_values
 
 load_dotenv()
 
+DATABASE_URI = os.getenv('DATABASE_URL').replace('://', 'ql://', 1)
+
 default_config = {
-        'database_uri': os.getenv('DATABASE_URL'),
+        'database_uri': DATABASE_URI,
         'database_echo': True,
         'flask_app_name': __name__
         }
