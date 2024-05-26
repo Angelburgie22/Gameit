@@ -12,34 +12,31 @@ class UserAccount(Model):
     account_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     email: Mapped[Optional[str]] = mapped_column(String(254), unique=True)
-    phone: Mapped[Optional[int]] = mapped_column(Integer, unique=True)
-    website: Mapped[Optional[str]] = mapped_column(String(100))
     username: Mapped[str] = mapped_column(String(30), unique=True, nullable=False)
-    location: Mapped[Optional[str]] = mapped_column(String(30))
-    birthdate: Mapped[Datetime] = mapped_column(Date, nullable=False)
-    cover_url: Mapped[Optional[str]] = mapped_column(String(100))
-    photo_url: Mapped[Optional[str]] = mapped_column(String(100))
-    is_private: Mapped[bool] = mapped_column(Boolean, default=False)
+    cover_url: Mapped[Optional[str]] = mapped_column(String(254))
+    photo_url: Mapped[Optional[str]] = mapped_column(String(254))
     description: Mapped[Optional[str]] = mapped_column(String(160))
-    pinned_post: Mapped[Optional[int]] = mapped_column(BigInteger)
-    is_validated: Mapped[bool] = mapped_column(Boolean, default=False)
-    is_deactivated: Mapped[bool] = mapped_column(Boolean, default=False)
-    elimination_date: Mapped[Optional[Datetime]] = mapped_column(DateTime)
-    registration_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
 
     login_credential: Mapped['UserLoginCredential'] = relationship(back_populates='account')
 
     followers: Mapped[list['UserFollower']] = relationship(
             back_populates='follower',
-            primaryjoin='UserAccountData.account_id == UserFollower.follower_id',
+            primaryjoin='UserAccount.account_id == UserFollower.follower_id',
             lazy='dynamic'
         )
 
     following: Mapped[list['UserFollower']] = relationship(
             back_populates='followee',
-            primaryjoin='UserAccountData.account_id == UserFollower.followee_id',
+            primaryjoin='UserAccount.account_id == UserFollower.followee_id',
             lazy='dynamic'
         )
+    
+    followed_subreddits: Mapped[list['Subreddit']] = relationship(
+        'Subreddit',
+        secondary='subreddit_follower',
+        back_populates='followers',
+        lazy='dynamic'
+    )
     
     posts: Mapped[list['Post']] = relationship('Post', back_populates='poster')
     group_posts: Mapped[list['Post']] = relationship('GroupPost', back_populates='poster')
@@ -52,26 +49,12 @@ class UserSession(Model):
     creation_time: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
     expiration_time: Mapped[Datetime] = mapped_column(DateTime)
 
-    account: Mapped[Optional['UserAccount']] = relationship(back_populates='logged_sessions')
-
-class HashingAlgorithm(Model):
-    __tablename__ = 'hashing_algorithm'
-
-    hashalgo_id: Mapped[int] = mapped_column(SMALLINT, primary_key=True)
-    name: Mapped[str] = mapped_column(String(20), nullable=False)
-
-    login_credential: Mapped[Optional['UserLoginCredential']] = relationship(back_populates='hashing_algorithm', lazy='noload')
-
 class UserLoginCredential(Model):
     __tablename__ = 'user_login_credential'
 
     credential_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
     passwd_hash: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
-    salt: Mapped[str] = mapped_column(String(255), unique=True, nullable=False)
     user_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), nullable=False)
-    algo_id: Mapped[int] = mapped_column(ForeignKey(HashingAlgorithm.hashalgo_id), nullable=False)
-
-    hashing_algorithm: Mapped['HashingAlgorithm'] = relationship(back_populates='login_credential')
 
     account: Mapped['UserAccount'] = relationship(back_populates='login_credential')
 
@@ -96,12 +79,6 @@ class UserFollower(Model):
         back_populates='followers',
         foreign_keys=[follower_id]
     )
-
-class BlockedUser(Model):
-    __tablename__ = 'blocked_user'
-
-    user_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), primary_key=True)
-    blocked_user_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), primary_key=True)
 
 class Subreddit(Model):
     __tablename__ = 'subreddit'
@@ -133,25 +110,9 @@ class Post(Model):
     creation_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
     replies_count: Mapped[int] = mapped_column(Integer, default=0)
     votes_count: Mapped[int] = mapped_column(Integer, default=0)
-    is_deleted: Mapped[bool] = mapped_column(Boolean, default=False)
-    is_archived: Mapped[bool] = mapped_column(Boolean, default=False)
-    subreddit: Mapped[int] = mapped_column(ForeignKey(Subreddit.subreddit_id), primary_key=True)
     poster_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), nullable=False)
     
     poster: Mapped['UserAccount'] = relationship('UserAccount', back_populates='posts')
-    media: Mapped[list['PostMedia']] = relationship('PostMedia', back_populates='post', lazy='dynamic')
-    poll: Mapped[Optional['Poll']] = relationship('Poll', back_populates='post', lazy='dynamic')
-
-class PostMedia(Model):
-    __tablename__ = 'post_media'
-
-    media_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    post_id: Mapped[int] = mapped_column(ForeignKey(Post.post_id), nullable=False)
-    media_type: Mapped[str] = mapped_column(String(20), nullable=False)
-    media_url: Mapped[str] = mapped_column(String(255), nullable=False)
-    alt_text: Mapped[Optional[str]] = mapped_column(String(100))
-
-    post: Mapped['Post'] = relationship(back_populates='media')
 
 class GroupPost(Model):
     __tablename__ = 'group_post'
@@ -162,47 +123,6 @@ class GroupPost(Model):
     creation_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
     replies_count: Mapped[int] = mapped_column(Integer, default=0)
     votes_count: Mapped[int] = mapped_column(Integer, default=0)
-    is_deleted: Mapped[bool] = mapped_column(Boolean, default=False)
-    is_archived: Mapped[bool] = mapped_column(Boolean, default=False)
-    subreddit: Mapped[int] = mapped_column(ForeignKey(Subreddit.subreddit_id), primary_key=True)
     poster_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), nullable=False)
     
     poster: Mapped['UserAccount'] = relationship('UserAccount', back_populates='group_posts')
-
-class Poll(Model):
-    __tablename__  = 'poll'
-
-    poll_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    duration: Mapped[Timedelta] = mapped_column(INTERVAL, nullable=False)
-    end_date: Mapped[Datetime] = mapped_column(DateTime, nullable=False)
-
-    options: Mapped[list['PollOption']] = relationship(back_populates='poll', lazy='noload')
-    post: Mapped['Post'] = relationship('Post', back_populates='poll', lazy='dynamic')
-
-class PollOption(Model):
-    __tablename__ = 'poll_option'
-
-    poll_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    option_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    item: Mapped[str] = mapped_column(String(25), nullable=False)
-    votes: Mapped[int] = mapped_column(Integer, default=0)
-
-    __table_args__ = (
-        UniqueConstraint('option_id'),
-    )
-
-    poll: Mapped[Optional['Poll']] = relationship(back_populates='options', lazy='dynamic')
-
-class PollOptionChosen(Model):
-    __tablename__ = 'poll_option_chosen'
-
-    poll_id: Mapped[int] = mapped_column(ForeignKey(Poll.poll_id))
-    option_id: Mapped[int] = mapped_column(ForeignKey(PollOption.option_id), primary_key=True)
-    voter_id: Mapped[int] = mapped_column(ForeignKey(UserAccount.account_id), primary_key=True)
-
-class Saves(Model):
-    __tablename__ = 'save'
-
-    save_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
-    post_id: Mapped[int] = mapped_column(ForeignKey(Post.post_id), nullable=False)
-    save_date: Mapped[Datetime] = mapped_column(DateTime, server_default=func.now())
