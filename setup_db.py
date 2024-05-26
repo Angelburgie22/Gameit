@@ -5,11 +5,13 @@ import os
 def setup_database(app):
     with app.app_context():
         # Create database tables
-        metadata.create_all(bind=db.engine)
+	metadata.create_all(bind=db.engine)
 
-        # Assert that tables are created
-        assert sqlalchemy.inspect(db.engine).has_table('user_account'), 'UserAccount not created'
+	# Assert that tables are created
+	assert sqlalchemy.inspect(db.engine).has_table('user_account'), 'UserAccount not created'
+
 	assert sqlalchemy.inspect(db.engine).has_table('user_login_credential'), 'UserLoginCredential not created'
+
 	assert sqlalchemy.inspect(db.engine).has_table('post'), 'Post not created'
         
 	# Execute insert statements
