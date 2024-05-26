@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //pantarijillas
+import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SearchScreen from "./screens/SearchScreen";
 import GroupScreen from "./screens/GroupScreen";
@@ -26,6 +27,10 @@ function StackScreens(){
         <StackNavigator.Navigator screenOptions={{
             headerStyle: {backgroundColor: "#2B2B2B",}, headerTintColor: 'white'
         }}>
+            <StackNavigator.Screen name = 'login' component={LoginScreen}
+            options={{
+                headerShown:  false
+            }}/>
             <StackNavigator.Screen name = 'home' component={Tabs}
             options={{
                 headerShown:  false

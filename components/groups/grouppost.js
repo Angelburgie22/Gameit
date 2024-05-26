@@ -8,7 +8,7 @@ const GroupPost = () => {
 
     useEffect(() => {
         axios.get("https://gameit-d77d4db89096.herokuapp.com/api/post/get_posts")
-        .then((response) => setUsers(response.data)).catch((err) => console.log(err))
+        .then((response) => setPosts(response.data)).catch((err) => console.log(err))
     },[]);
 
     const resderGroupCard = ({item})=>{

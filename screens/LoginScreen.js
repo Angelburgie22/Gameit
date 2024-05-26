@@ -13,11 +13,10 @@ const LoginScreen = ({ navigation }) => {
     //  - Call your authentication API
     //  - Store user data or token securely
     //  - If successful, navigate to the home screen
-    navigation.navigate('Home');
+    navigation.navigate('home');
   };
 
   return (
-
     <View style={styles.container}>
       <View style={{ alignItems: "center" }}><Text style={styles.title}>GameIt</Text></View>
       <View style={{ alignItems: "center" }}><Text style={styles.subtitle}>Se parte de la comunidad Gamer</Text></View>
