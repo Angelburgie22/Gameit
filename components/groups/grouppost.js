@@ -32,7 +32,7 @@ const GroupPost = () => {
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Unirse a Grupo</Text>
                     </TouchableOpacity>
-                    <Text style={styles.groupInfo}>{item.post.grouppost_id} / 4</Text>
+                    <Text style={styles.groupInfo}>1 / 4</Text>
                 </View>
             </View>
         );

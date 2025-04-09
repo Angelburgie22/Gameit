@@ -1,7 +1,7 @@
 import React from 'react';
-import { Alert, View, Text, TextInput, Button, StyleSheet, TouchableWithoutFeedback} from 'react-native';
-import Constants from 'expo-constants'
-import { StatusBar } from 'expo-status-bar';
+import { Alert, View, Image, Text, TextInput, Button, StyleSheet, TouchableWithoutFeedback, Touchable, TouchableOpacity} from 'react-native';
+import { StatusBar } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -17,10 +17,11 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
+    <>
+    <StatusBar barStyle="light-content" />
     <View style={styles.container}>
-      <View style={{ alignItems: "center" }}><Text style={styles.title}>GameIt</Text></View>
-      <View style={{ alignItems: "center" }}><Text style={styles.subtitle}>Se parte de la comunidad Gamer</Text></View>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center" }}><Image style = {styles.image} source={require('../assets/logo.png')}></Image></View>
+      <View style = {{alignItems: "center"}}>
         <TextInput
           style={styles.input}
           value={username}
@@ -29,8 +30,6 @@ const LoginScreen = ({ navigation }) => {
           placeholder="Email or username *"
           placeholderTextColor="#999999"
         />
-      </View>
-      <View style={{ alignItems: "center" }}>
         <TextInput
           style={styles.input}
           value={password}
@@ -40,16 +39,27 @@ const LoginScreen = ({ navigation }) => {
           placeholderTextColor="#999999"
           secureTextEntry
         />
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={styles.text}>Acepto los términos y condiciones</Text>
+        </View>
+
       </View>
-        <Button borderColor= "black" color = "#00CC45"title='Iniciar sesion' onPress={handleLogin}/>
-      <View/>
-      <View style={{ alignSelf: "center", flexDirection: "row" }}>
-        <Text style={styles.text}>¿Nuevo en GameIt?</Text>
-        <TouchableWithoutFeedback onPress={() => Alert.alert('aqui te lleva a la pag de registro')}>
-          <Text style={styles.registertext}> Registrate Aqui</Text>
-        </TouchableWithoutFeedback>
+      <View style={{ alignItems: "center", marginBottom: 30 }}>
+        <TouchableOpacity
+          style={styles.loginButton}
+          onPress={handleLogin}
+        >
+          <Text style={styles.loginButtonText}>Iniciar sesión</Text>
+        </TouchableOpacity>
+        <View style={{ flexDirection: "row", marginTop: 10 }}>
+          <Text style={styles.text}>¿Nuevo en GameIt?</Text>
+          <TouchableWithoutFeedback onPress={() => Alert.alert('aqui te lleva a la pag de registro')}>
+            <Text style={styles.registertext}> Registrate Aquí</Text>
+          </TouchableWithoutFeedback>
+        </View>
       </View>
     </View>
+    </>
   );
 };
 
@@ -57,8 +67,9 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     paddingHorizontal: 30,
-    justifyContent: "center",
     backgroundColor: "#181818",
+    flexDirection: "column",
+    justifyContent: "space-between"
   },
   title: {
     fontSize: 50,
@@ -91,7 +102,30 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: "#FFFFFF",
     fontWeight: "bold"
-  }
+  },
+  image:{
+    marginTop: 100,
+    height: 200,
+    width: 200
+  },
+  loginButton: {
+    backgroundColor: "#00CC45",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 8,
+    borderWidth: 1,
+    width: "80%",
+    borderColor: "black",
+    alignItems: "center",
+    marginBottom: 10
+  },
+  loginButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16
+  },
+  
+  
 });
 
 export default LoginScreen;

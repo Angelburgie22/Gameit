@@ -1,5 +1,9 @@
 {
   "expo": {
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#000000"
+    },
     "name": "Gameit",
     "slug": "Gameit",
     "version": "1.0.0",
