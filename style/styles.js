@@ -60,6 +60,21 @@ const styles=StyleSheet.create({
         fontWeight: "bold",
         fontSize: 16
       },
+      profileimage : {
+        width: 48,
+        height: 48,
+        borderRadius: 30,
+        marginLeft: 15
+    },
+    text : {
+        color: "#999999",
+        fontSize: 12
+    },
+    name : {
+        color: "white",
+        fontWeight: "bold",
+        fontSize: 15
+    }
 })
 
 export default styles;

@@ -14,7 +14,7 @@ const ResultC = () => {
         ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={({item : com}) => (
             <TouchableOpacity onPress={() => navigation.navigate("Comunidad")}>
-            <View key={com.id}style = {{backgroundColor: "#4F4F4F", width: "90%", alignSelf: "center", height: 60, borderRadius: 10}}>
+            <View key={com.id}style = {{backgroundColor: "#4F4F4F", width: "95%", alignSelf: "center", height: 70, borderRadius: 10}}>
                 <View style = {{flexDirection: "row"}}>
                     <View style ={{padding: 10}}>
                         <Image style = {styles.image}source={{uri : com.icon}} ></Image>
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     image : {
         width: 48,
         height: 48,
-        borderRadius: 30,
+        borderRadius: 10,
     },
     name : {
         fontSize: 18,
