@@ -52,7 +52,7 @@ const LoginScreen = ({ navigation }) => {
         >
           <Text style={styles.loginButtonText}>Iniciar sesión</Text>
         </TouchableOpacity>
-        <View style={{ flexDirection: "row", marginTop: 10 }}>
+        <View style={{ flexDirection: "row"}}>
           <Text style={styles.text}>¿Nuevo en GameIt?</Text>
           <TouchableWithoutFeedback onPress={() => Alert.alert('aqui te lleva a la pag de registro')}>
             <Text style={styles.registertext}> Registrate Aquí</Text>

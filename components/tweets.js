@@ -1,93 +1,111 @@
-import React, {useEffect, useState} from "react";
-import {Image, FlatList, View, Text, StyleSheet,TouchableOpacity} from 'react-native';
-import prueba, { tweets } from "../datos/Prueba";
-import axios from "axios";
+import React from "react";
+import {
+  Image,
+  FlatList,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import prueba from "../datos/Prueba";
 
 const Tweets = () => {
-    const navigation = useNavigation();
-    const [posts, setPosts] = useState([]);
+  const navigation = useNavigation();
 
-    useEffect(() => {
-        axios.get("https://gameit-d77d4db89096.herokuapp.com/api/post/get_posts")
-        .then((response) => {
-            console.log("Response:", response.data); // Print the response data
-            setPosts(response.data.posts);
-        })
-        .catch((err) => console.log(err));
-    }, []);
-
-    const resderUserCard = ({item})=>{
-        const user_id = item.user_id;
-
-        return(
-            <View  style = {{paddingTop: 10, backgroundColor: "#4F4F4F", borderRadius: 10, flex : 1, width: "95%", alignSelf: "center"}}>
-                <View style = {{flexDirection: "row"}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("Perfil", { user_id })}>
-                    <View style = {{padding: 10}}>
-                        <Image style = {styles.image} source={{uri : item.photo_url}}/>
-                    </View>
-                    </TouchableOpacity>
-                    <View>
-                        <Text style = {styles.name}>{item.user}</Text>
-                        <Text style = {{color : "gray"}}>{item.username}</Text>
-                    </View>
-                </View>
-                <View style = {{paddingBottom: 7, flex: 1}}>
-                    <Text style = {styles.contentxt}>{item.post.text}</Text> 
-                </View>
-                <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
-                    <View style= {{flexDirection: "row"}}>
-                        <TouchableOpacity>
-                            <Text style = {styles.text}>Likes: </Text>             
-                        </TouchableOpacity>
-                        <Text style = {styles.text}>{item.post.votes_count}</Text>  
-                    </View>
-                    <View style= {{flexDirection: "row"}}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Comentarios")}>
-                            <Text style = {styles.text}>Comentarios: </Text>             
-                        </TouchableOpacity>
-                        <Text style = {styles.text}>{item.post.replies_count}</Text>
-                    </View>
-                    <View style= {{flexDirection: "row"}}>
-                        <TouchableOpacity>
-                            <Text style = {styles.text}>Compartidos: </Text>             
-                        </TouchableOpacity>
-                    <Text style = {styles.text}>{item.post.shares_count}</Text>
-                    </View>             
-                </View>
-                <View style = {{padding: 10}}/>
+  return (
+    <FlatList
+      data={prueba}
+      keyExtractor={(item) => item.id.toString()}
+      ItemSeparatorComponent={() => <View style={styles.separator} />}
+      renderItem={({ item: tweet }) => (
+        <View style={styles.tweetContainer}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.navigate("Perfil")}>
+              <Image style={styles.avatar} source={{ uri: tweet.avatar }} />
+            </TouchableOpacity>
+            <View style={styles.userInfo}>
+              <Text style={styles.name}>{tweet.name}</Text>
+              <Text style={styles.screenName}>@{tweet.screenName}</Text>
             </View>
-        )
-    }
+          </View>
 
-    console.log("Huh: " + posts);
-    
-    return(
-        <FlatList data ={posts}
-        keyExtractor={(item) => item}
-        ItemSeparatorComponent={() => <Text> </Text>}
-        renderItem={resderUserCard}/>
-    )
-}
+          <View style={styles.content}>
+            <Text style={styles.text}>{tweet.fullText}</Text>
+          </View>
+
+          <View style={styles.footer}>
+            <TouchableOpacity onPress={() => navigation.navigate("Comentarios")} style={styles.footerItem}>
+              <Text style={styles.footerLabel}>💬 {tweet.replyCount}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.footerItem}>
+              <Text style={styles.footerLabel}>🔁 {tweet.retweetCount}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.footerItem}>
+              <Text style={styles.footerLabel}>❤️ {tweet.likeCount}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
-    image : {
-        width: 48,
-        height: 48,
-        borderRadius: 30
-    },
-    name : {
-        fontSize: 18,
-        color: "white"
-    },
-    contentxt : {
-        color : "white",
-        fontWeight: "bold"
-    },
-    text : {
-        color : "white"
-    }
-})
+  tweetContainer: {
+    backgroundColor: "#1C1C1E",
+    padding: 12,
+    borderRadius: 12,
+    marginHorizontal: 10,
+  },
+  separator: {
+    height: 10,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  avatar: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    marginRight: 10,
+  },
+  userInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  name: {
+    color: "#ffffff",
+    fontWeight: "bold",
+    fontSize: 16,
+    marginRight: 5,
+  },
+  screenName: {
+    color: "#A9A9A9",
+    fontSize: 14,
+  },
+  content: {
+    marginTop: 8,
+    marginBottom: 10,
+  },
+  text: {
+    color: "#ffffff",
+    fontSize: 16,
+  },
+  footer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 5,
+  },
+  footerItem: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  footerLabel: {
+    color: "#A9A9A9",
+    fontSize: 14,
+  },
+});
 
-export default Tweets
+export default Tweets;
