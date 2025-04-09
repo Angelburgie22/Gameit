@@ -66,7 +66,7 @@ const styles=StyleSheet.create({
         borderRadius: 30,
         marginLeft: 15
     },
-    text : {
+    textmsg : {
         color: "#999999",
         fontSize: 12
     },
