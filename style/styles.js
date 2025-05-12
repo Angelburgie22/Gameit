@@ -1,80 +1,65 @@
 import { StyleSheet } from "react-native";
-const styles=StyleSheet.create({
-    container: {
-        flexGrow: 1,
-        paddingHorizontal: 30,
-        backgroundColor: "#181818",
-        flexDirection: "column",
-        justifyContent: "space-around"
-      },
-      title: {
-        fontSize: 50,
-        fontWeight: 'bold',
-        color: "#FFFFFF",
-      },
-      subtitle: {
-        fontSize: 20,
-        padding: 10,
-        marginBottom: 20,
-        color: "#FFFFFF",
-      },
-      input: {
-        height: 40,
-        width: 300,
-        borderColor: "gray",
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 10,
-        marginBottom: 10,
-      },
-      button: {
-        backgroundColorcolor: "#00CC45",
-      },
-      text: {
-        marginTop: 15,
-        color: "#FFFFFF",
-      },
-      registertext:{
-        marginTop: 15,
-        color: "#FFFFFF",
-        fontWeight: "bold"
-      },
-      image:{
-        marginTop: 100,
-        height: 200,
-        width: 200
-      },
-      loginButton: {
-        backgroundColor: "#00CC45",
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 8,
-        borderWidth: 1,
-        width: "80%",
-        borderColor: "black",
-        alignItems: "center",
-        marginBottom: 10
-      },
-      loginButtonText: {
-        color: "white",
-        fontWeight: "bold",
-        fontSize: 16
-      },
-      profileimage : {
-        width: 48,
-        height: 48,
-        borderRadius: 30,
-        marginLeft: 15
-    },
-    textmsg : {
-        color: "#999999",
-        fontSize: 12
-    },
-    name : {
-        color: "white",
-        fontWeight: "bold",
-        fontSize: 15
-    }
-})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+    backgroundColor: '#333333',
+  },
+  image: {
+    width: 150,
+    height: 150,
+    marginBottom: 30,
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    backgroundColor: '#444444',
+    borderRadius: 5,
+    paddingLeft: 10,
+    color: 'white',
+    marginBottom: 15,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  checkbox: {
+    width: 24,
+    height: 24,
+    borderWidth: 2,
+    borderRadius: 4,
+    marginRight: 10,
+  },
+  checked: {
+    backgroundColor: '#34C759',  // color verde
+    borderColor: '#34C759',  // color verde
+  },
+  unchecked: {
+    backgroundColor: 'transparent',
+    borderColor: '#888888',
+  },
+  text: {
+    color: 'white',
+    fontSize: 14,
+  },
+  loginButton: {
+    backgroundColor: '#34C759',  // color verde
+    width: '80%',
+    padding: 15,
+    borderRadius: 5,
+    marginBottom: 20,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  loginButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  registertext: {
+    color: '#34C759',  // color verde
+    fontSize: 16,
+  },
+});
 
 export default styles;

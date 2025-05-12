@@ -78,8 +78,6 @@ import React from "react";
          padding: 10,
      }
  
- 
- 
  })
  
  export default GroupPost

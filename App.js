@@ -12,7 +12,6 @@ export default function App() {
   return (
     <>
       <AuthProvider>
-      <StatusBar barStyle="light-content" backgroundColor="transparent" translucent />
         <Navigation/>
       </AuthProvider>
     </>

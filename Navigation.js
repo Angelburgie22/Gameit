@@ -9,11 +9,13 @@ import HomeScreen from "./screens/HomeScreen";
 import SearchScreen from "./screens/SearchScreen";
 import GroupScreen from "./screens/GroupScreen";
 import ChatScreen from "./screens/ChatScreen";
+import ConversationScreen from "./screens/ConversationScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import Coments from "./screens/stack/Coments";
 import Results from "./screens/ResultsScreen";
 import CommunityScreen from "./screens/CommunityScreen";
 import OtherProfiles from "./components/profile/otherprofiles";
+import RegisterScreen from "./screens/RegisterScreen";
 //iconos
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
@@ -31,11 +33,20 @@ function StackScreens(){
             options={{
                 headerShown:  false
             }}/>
+            <StackNavigator.Screen name = 'register' component={RegisterScreen}
+            options={{
+                headerShown:  false
+            }}/>
             <StackNavigator.Screen name = 'home' component={Tabs}
             options={{
                 headerShown:  false
             }}/>
             <StackNavigator.Screen name = 'Perfil' component={OtherProfiles} 
+            options={{
+                statusBarColor:  "gray",
+                headerBackTitleVisible: false
+            }}/>
+            <StackNavigator.Screen name = 'OtherProfiles' component={OtherProfiles} 
             options={{
                 statusBarColor:  "gray",
                 headerBackTitleVisible: false
@@ -55,7 +66,12 @@ function StackScreens(){
             options={{
                 statusBarColor:  "gray",
                 headerBackTitleVisible: false,
-            }}/>               
+            }}/>    
+            <StackNavigator.Screen name = 'Conversation' component={ConversationScreen} 
+            options={{
+                statusBarColor:  "gray",
+                headerShown: false
+            }}/>             
 
         </StackNavigator.Navigator>
     )
