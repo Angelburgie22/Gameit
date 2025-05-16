@@ -48,6 +48,8 @@ const stylechat = StyleSheet.create({
     conversationContainer: {
         flex: 1,
         backgroundColor: '#1e1e1e',
+        paddingTop: 30,
+        paddingBottom: 40
     },
     conversationHeader: {
         flexDirection: 'row',
@@ -77,7 +79,7 @@ const stylechat = StyleSheet.create({
         maxWidth: '80%',
     },
     sent: {
-        backgroundColor: '#007bff', // Azul para los mensajes enviados
+        backgroundColor: '#34C759', // Azul para los mensajes enviados
         justifyContent: 'flex-end',
          alignSelf: 'flex-end',
     },

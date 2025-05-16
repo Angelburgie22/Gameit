@@ -9,7 +9,7 @@ const Trending = () => {
         data ={trending}
         ItemSeparatorComponent={() => <Text> </Text>}
         renderItem={({item : trend}) =>(
-            <View key= {trend.id} style = {{backgroundColor: "#4F4F4F" , width: "95%", alignSelf: "center", height: 70, borderRadius: 10}}>
+            <View key= {trend.id} style = {{backgroundColor: "#222831" , width: "95%", alignSelf: "center", height: 70, borderRadius: 10}}>
                 <View style = {{flexDirection: "row"}}>
                     <View style ={{padding: 10}}>
                         <Image style = {styles.image}source={{uri : trend.photo}} ></Image>

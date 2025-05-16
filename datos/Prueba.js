@@ -11,6 +11,8 @@ export default [
         replyCount: 1,
         likeCount: 5,
         players: 1,
+        gameuri: "https://cdn2.unrealengine.com/ecosystem-w-fn-1920x1080-ac7f3aa4b57b.jpg",
+        namegame: "Fortnite"
     },
     {
         name: "Nose",
@@ -24,6 +26,8 @@ export default [
         replyCount: 1,
         likeCount: 5,
         players: 2,
+        gameuri: "https://pbs.twimg.com/profile_images/1359301269266038785/-U4xyBGU_200x200.jpg",
+        namegame: "Call of Gruty"
     },
     {
         name: "Ekizde",
@@ -37,6 +41,8 @@ export default [
         replyCount: 1,
         likeCount: 5,
         players: 3,
+        gameuri: "https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/3241660/2cff5912c1add2e009eb1c1c630a47ac06cb81a1/capsule_616x353.jpg?t=1747381002",
+        namegame: "R.E.P.O"
     },
     {
         name: "Jijijija",
@@ -50,6 +56,8 @@ export default [
         replyCount: 1,
         likeCount: 5,
         players: 4,
+        gameuri: "https://cdn.sortiraparis.com/images/80/66131/1103306-valorant-le-jeu-video-signe-riot-games-est-disponible.jpg",
+        namegame: "Valorant"
     },
     {
         name: "Pro123",
@@ -63,6 +71,8 @@ export default [
         replyCount: 1,
         likeCount: 5,
         players: 1,
+        gameuri: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg",
+        namegame: "League of Legends"
     },
 
 ]

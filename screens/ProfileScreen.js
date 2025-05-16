@@ -4,11 +4,9 @@ import Profiles from '../components/profile/profile';
 
 const ProfileScreen = () => {
     return(
-        <ScrollView style = {{backgroundColor : "#404040", flex : 1}}>
-            <View>
+        <View style = {{backgroundColor : "#404040", flex : 1}}>
                 <Profiles/>
-            </View>
-        </ScrollView>
+        </View>
     );
 };
 

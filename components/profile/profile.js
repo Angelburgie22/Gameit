@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Tweets from '../tweets';
 
-const ProfileScreen = () => {
+const Profiles = () => {
   const [user, setUser] = useState(null);
   const [userTweets, setUserTweets] = useState([]);
   const navigation = useNavigation();
@@ -59,7 +59,7 @@ const ProfileScreen = () => {
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.profileContainer}>
         <Image style={styles.image} source={{ uri: user.avatar || "https://i.pravatar.cc/150?img=68" }} />
         <Text style={styles.name}>{user.username}</Text>
@@ -83,7 +83,7 @@ const ProfileScreen = () => {
         <Text style={styles.yourTweetsTitle}>Tus Publicaciones</Text>
         <Tweets tweets={userTweets} />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
@@ -162,4 +162,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileScreen;
+export default Profiles;

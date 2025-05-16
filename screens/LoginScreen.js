@@ -6,23 +6,17 @@ import styles from '../style/styles'; // Asumiendo que tienes un archivo de esti
 const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isChecked, setIsChecked] = useState(false); // Estado para el checkbox
 
   // Lógica de inicio de sesión
   const handleLogin = async () => {
-    if (!isChecked) {
-      Alert.alert('Error', 'Debes aceptar los términos y condiciones');
-      return;
-    }
-
     try {
       // Verificar si el usuario existe en AsyncStorage
-      const storedUser = await AsyncStorage.getItem(`@user_${username}`); // Usar un prefijo para usuarios
+      const storedUser = await AsyncStorage.getItem(`@user_${username}`); 
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         if (parsedUser.password === password) {
           // Login exitoso
-          await AsyncStorage.setItem('@loggedInUser', JSON.stringify(parsedUser)); // Guardar el usuario logueado
+          await AsyncStorage.setItem('@loggedInUser', JSON.stringify(parsedUser));
           Alert.alert('Éxito', `Bienvenido, ${parsedUser.username}`);
           navigation.navigate('home');
         } else {
@@ -60,10 +54,6 @@ const LoginScreen = ({ navigation }) => {
             secureTextEntry
           />
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => setIsChecked(!isChecked)} style={styles.checkboxContainer}>
-              <View style={[styles.checkbox, isChecked ? styles.checked : styles.unchecked]} />
-            </TouchableOpacity>
-            <Text style={styles.text}>Acepto los términos y condiciones</Text>
           </View>
         </View>
         <View style={{ alignItems: "center", marginBottom: 30 }}>

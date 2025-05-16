@@ -6,7 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 const SearchScreen = () => {
     const navigation = useNavigation();
     return(      
-        <View style = {{backgroundColor : "#404040", flex : 1}}>
+        <View style = {{backgroundColor : "#121212", flex : 1}}>
             <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
                     <TextInput
                         style={styles.input}
@@ -33,7 +33,7 @@ const SearchScreen = () => {
 const styles = StyleSheet.create({
     input: {
         height: 40,
-        width: 300,
+        width: "75%",
         padding: 5,
         borderColor: "gray",
         borderWidth: 1,
@@ -43,14 +43,16 @@ const styles = StyleSheet.create({
         marginTop: "3%",
       },
       Buttons:{
-        backgroundColor: "white",
+        backgroundColor: "#34C759",
         borderRadius:10,
         width: "20%",
-        height: "60%",
+        height: 40,
         marginTop: "3%",
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     Text:{
-        backgroundColor: "Black",
+        color: '#fff',
         borderColor: "black",
         textAlign: "center",
         padding: 10,

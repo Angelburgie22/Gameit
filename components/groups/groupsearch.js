@@ -3,14 +3,17 @@ import { Image, FlatList, View, Text, StyleSheet, TouchableOpacity } from 'react
 import Prueba from "../../datos/Prueba";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const GroupPost = () => {
+const GroupSearch = ({ searchText }) => {
+    const filteredGroups = Prueba.filter(groups =>
+        groups.namegame.toLowerCase().includes(searchText.toLowerCase())
+    );
+
     return (
         <FlatList
-            data={Prueba}
+            data={filteredGroups}
             ItemSeparatorComponent={() => <View style={{ height: 20 }} />}
             renderItem={({ item: groups }) => (
                 <View key={groups.id} style={styles.card}>
-                 
                     <View style={styles.header}>
                         <Image style={styles.avatar} source={{ uri: groups.avatar }} />
                         <View style={{ marginLeft: 10 }}>
@@ -19,11 +22,7 @@ const GroupPost = () => {
                         </View>
                     </View>
                     <Text style={styles.description}>{groups.namegame}</Text>
-
-                  
                     <Image style={styles.postImage} source={{ uri: groups.gameuri }} />
-
-                    
 
                     <View style={styles.footer}>
                         <TouchableOpacity style={styles.joinButton}>
@@ -39,7 +38,8 @@ const GroupPost = () => {
             )}
         />
     );
-}
+};
+
 
 const styles = StyleSheet.create({
     card: {
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default GroupPost;
+export default GroupSearch;

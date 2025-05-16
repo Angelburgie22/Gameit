@@ -12,31 +12,29 @@ const ConversationScreen = ({ route }) => {
     const [loggedInUser, setLoggedInUser] = useState(null);
     const navigation = useNavigation();
 
-     useEffect(() => {
-        const loadConversation = async () => {
-            
-          try {
-            // Aquí deberías cargar los mensajes de la conversación entre el usuario logueado
-            // y el usuario con el ID userId.  Por ahora, estamos usando datos de prueba.
-             const user = await AsyncStorage.getItem('@loggedInUser');
-            if(user){
-              const parsedUser = JSON.parse(user);
-              setLoggedInUser(parsedUser);
-            }
-            const dummyMessages = [
-                { id: 'm1', sender: loggedInUser.username, text: 'Hola ' + userName, timestamp: '10:31 AM' },
-                { id: 'm2', sender: userName, text: 'Hola! Cómo estás?', timestamp: '10:32 AM' },
-                { id: 'm3', sender: loggedInUser.username, text: 'Bien, gracias. Y tú?', timestamp: '10:33 AM' },
-            ];
-            setMessages(dummyMessages);
+useEffect(() => {
+    const loadConversation = async () => {
+      try {
+        const user = await AsyncStorage.getItem('@loggedInUser');
+        if(user){
+          const parsedUser = JSON.parse(user);
+          setLoggedInUser(parsedUser);
 
-          } catch (error) {
-            console.error("Error al cargar la conversación", error);
-            Alert.alert("Error", "No se pudo cargar la conversación.");
-          }
-        };
-        loadConversation();
-    }, [userId]);
+          // Ahora que tenemos el usuario, creamos los mensajes dummy
+          const dummyMessages = [
+              { id: 'm1', sender: parsedUser.username, text: 'Hola ' + userName, timestamp: '10:31 AM' },
+              { id: 'm2', sender: userName, text: 'Hola! Cómo estás?', timestamp: '10:32 AM' },
+              { id: 'm3', sender: parsedUser.username, text: 'Bien, gracias. Y tú?', timestamp: '10:33 AM' },
+          ];
+          setMessages(dummyMessages);
+        }
+      } catch (error) {
+        console.error("Error al cargar la conversación", error);
+      }
+    };
+    loadConversation();
+}, [userId]);
+
 
     const handleSendMessage = () => {
         if (newMessage.trim() === '') return;
@@ -70,10 +68,9 @@ const ConversationScreen = ({ route }) => {
                         item.sender === loggedInUser.username ? stylechat.sent : stylechat.received,
                     ]}>
                         <Text style={stylechat.messageText}>{item.text}</Text>
-                        <Text style={stylechat.messageTimestamp}>{item.timestamp}</Text>
                     </View>
                 )}
-                inverted // Para mostrar los mensajes más recientes al final
+                 // Para mostrar los mensajes más recientes al final
             />
             <View style={stylechat.inputContainer}>
                 <TextInput

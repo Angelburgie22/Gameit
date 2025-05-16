@@ -4,7 +4,7 @@ import GroupPost from '../components/groups/grouppost';
 
 const GroupScreen = () => {
     return(
-        <View style = {{backgroundColor : "#404040", flex : 1}}>
+        <View style = {{backgroundColor : "#121212", flex : 1, paddingBottom: 100}}>
             <View style = {{paddingBottom: 20}}>
                 <TouchableOpacity style = {styles.Buttons}>
                     <Text style = {styles.Text}>Crear Grupo</Text>

@@ -74,7 +74,7 @@ const TweetItem = ({ tweet }) => {
   );
 };
 
-const Tweets = ({ tweets: propTweets, userId }) => { // Agregamos userId como prop
+const Tweets = ({ tweets: propTweets, userId, ListHeaderComponent  }) => { // Agregamos userId como prop
   const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
@@ -136,7 +136,12 @@ const Tweets = ({ tweets: propTweets, userId }) => { // Agregamos userId como pr
     <FlatList
       data={tweets}
       keyExtractor={(item) => item.id.toString()}
-      ListHeaderComponent={<TweetComposer onTweet={handleNewTweet} />}
+      ListHeaderComponent={
+        <>
+          {ListHeaderComponent}
+          <TweetComposer onTweet={handleNewTweet} />
+        </>
+      }
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       renderItem={({ item }) => <TweetItem tweet={item} />}
     />
